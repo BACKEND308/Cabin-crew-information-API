@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "main": "server.js",
     "scripts": {
-        "start": "nodemon server"
+        "start": "nodemon server",
+        "test mongoConnection": "node ./tests/testMongoConnection",
+        "test mysqlConnection": "node ./tests/testMysqlConnection"
     },
     "keywords": [],
     "author": "",

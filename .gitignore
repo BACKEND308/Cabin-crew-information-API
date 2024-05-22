@@ -1,1 +1,4 @@
 node_modules
+db/conn.js
+db/connectMysql.js
+tests/testMysqlConnection.js
