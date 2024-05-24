@@ -30,7 +30,13 @@ router.post('/', async (req, res) => {
         CrewID: req.body.CrewID,
         Role: req.body.Role,
         MemberName: req.body.MemberName,
-        AssignedSeat: req.body.AssignedSeat
+        AssignedSeat: req.body.AssignedSeat,
+        Age: req.body.Age,
+        AircraftRestrictions: req.body.AircraftRestrictions,
+        Assigned_Seat: req.body.Assigned,
+        Gender: req.body.Gender,
+        Known_Languages: req.body.Known_Languages,
+        Nationality: req.body.Nationality
     });
     try {
         const newCabinCrew = await cabinCrew.save();
@@ -75,6 +81,62 @@ router.patch('/:id', async (req, res) => {
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.AssignedSeat = req.body.AssignedSeat;
+        const updatedCabinCrew = await cabinCrew.save();
+        res.json(updatedCabinCrew);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+//PATCH route to update a cabin crew member's age
+router.patch('/:id', async (req, res) => {
+    try {
+        const cabinCrew = await CabinCrew.findById(req.params.id);
+        if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
+
+        cabinCrew.Age = req.body.Age;
+        const updatedCabinCrew = await cabinCrew.save();
+        res.json(updatedCabinCrew);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+//PATCH route to update a cabin crew member's aircraft restrictions
+router.patch('/:id', async (req, res) => {
+    try {
+        const cabinCrew = await CabinCrew.findById(req.params.id);
+        if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
+
+        cabinCrew.AircraftRestrictions = req.body.AircraftRestrictions;
+        const updatedCabinCrew = await cabinCrew.save();
+        res.json(updatedCabinCrew);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+//PATCH route to update a cabin crew member's known languages
+router.patch('/:id', async (req, res) => {
+    try {
+        const cabinCrew = await CabinCrew.findById(req.params.id);
+        if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
+
+        cabinCrew.Known_Languages = req.body.Known_Languages;
+        const updatedCabinCrew = await cabinCrew.save();
+        res.json(updatedCabinCrew);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+//PATCH route to update a cabin crew member's nationality
+router.patch('/:id', async (req, res) => {
+    try {
+        const cabinCrew = await CabinCrew.findById(req.params.id);
+        if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });  
+
+        cabinCrew.Nationality = req.body.Nationality;
         const updatedCabinCrew = await cabinCrew.save();
         res.json(updatedCabinCrew);
     } catch (err) {
