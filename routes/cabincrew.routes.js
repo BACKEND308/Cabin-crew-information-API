@@ -30,12 +30,11 @@ router.post('/', async (req, res) => {
         CrewID: req.body.CrewID,
         Role: req.body.Role,
         MemberName: req.body.MemberName,
-        AssignedSeat: req.body.AssignedSeat,
         Age: req.body.Age,
-        AircraftRestrictions: req.body.AircraftRestrictions,
+        "Aircraft Restrictions": req.body.AircraftRestrictions,
         Assigned_Seat: req.body.Assigned,
         Gender: req.body.Gender,
-        Known_Languages: req.body.Known_Languages,
+        "Known Languages": req.body.Known_Languages,
         Nationality: req.body.Nationality
     });
     try {
@@ -80,7 +79,7 @@ router.patch('/:id', async (req, res) => {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
-        cabinCrew.AssignedSeat = req.body.AssignedSeat;
+        cabinCrew.Assigned_Seat = req.body.Assigned_Seat;
         const updatedCabinCrew = await cabinCrew.save();
         res.json(updatedCabinCrew);
     } catch (err) {
