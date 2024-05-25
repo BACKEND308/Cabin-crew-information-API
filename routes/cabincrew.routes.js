@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 // GET route to retrieve a cabin crew member by ID
 router.get('/:id', async (req, res) => {
     try {
-        const cabinCrew = await cabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await cabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
         res.json(cabinCrew);
     }catch (err) {
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
 // PATCH route to update a cabin crew member's name
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.MemberName = req.body.MemberName;
@@ -65,7 +65,7 @@ router.patch('/:id', async (req, res) => {
 // PATCH route to update a cabin crew member's role
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.Role = req.body.Role;
@@ -79,7 +79,7 @@ router.patch('/:id', async (req, res) => {
 // PATCH route to update a cabin crew member's assigned seat
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.Assigned_Seat = req.body.Assigned_Seat;
@@ -93,7 +93,7 @@ router.patch('/:id', async (req, res) => {
 //PATCH route to update a cabin crew member's age
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.Age = req.body.Age;
@@ -107,7 +107,7 @@ router.patch('/:id', async (req, res) => {
 //PATCH route to update a cabin crew member's aircraft restrictions
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.AircraftRestrictions = req.body.AircraftRestrictions;
@@ -121,7 +121,7 @@ router.patch('/:id', async (req, res) => {
 //PATCH route to update a cabin crew member's known languages
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         cabinCrew.Known_Languages = req.body.Known_Languages;
@@ -135,7 +135,7 @@ router.patch('/:id', async (req, res) => {
 //PATCH route to update a cabin crew member's nationality
 router.patch('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });  
 
         cabinCrew.Nationality = req.body.Nationality;
@@ -149,7 +149,7 @@ router.patch('/:id', async (req, res) => {
 // DELETE route to delete a cabin crew member by ID
 router.delete('/:id', async (req, res) => {
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.CrewID);
+        const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         await cabinCrew.remove();

@@ -12,7 +12,7 @@ const CabinCrewSchema = new mongoose.Schema({
     MemberName: {type: String, required: true, default: '-'},
     Nationality: {type: String, required: true, default: '-'},
     Role: {type: String, required: true, enum: ['chief', 'regular', 'chef', '-'], default: '-'}
-});
+    }, {collection: 'cabin_crew'});
 
 const CabinCrew = mongoose.model('cabin_crew', CabinCrewSchema);
 module.exports = CabinCrew;
