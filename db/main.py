@@ -45,7 +45,7 @@ def prepare_chef_data(cabin_crew_data):
     if len(cabin_crew_data["Dishes"]) < 2 or len(cabin_crew_data["Dishes"]) > 4:
         raise ValueError("Chef must have between 2 and 4 dishes.")
     featured_dish = random.choice(cabin_crew_data["Dishes"])
-    cabin_crew_data["Featured Dish"] = featured_dish
+    cabin_crew_data["Featured_Dish"] = featured_dish
     return cabin_crew_data
 
 
@@ -68,7 +68,7 @@ def input_chef_data():
 
     return {
         "Dishes": dishes,
-        "Featured Dish": featured_dish
+        "Featured_Dish": featured_dish
     }
 
 
@@ -96,8 +96,8 @@ def main():
             "Age": 34,
             "Gender": "Female",
             "Nationality": "American",
-            "Known Languages": ["English", "Spanish"],
-            "Aircraft Restrictions": ["Boeing 747", "Airbus A320"],
+            "Known_Languages": ["English", "Spanish"],
+            "Aircraft_Restrictions": ["Boeing 747", "Airbus A320"],
             "Role": "chief",
             "Assigned_Seat": "1A"
         },
@@ -107,8 +107,8 @@ def main():
             "Age": 29,
             "Gender": "Male",
             "Nationality": "British",
-            "Known Languages": ["English", "French"],
-            "Aircraft Restrictions": ["Boeing 777"],
+            "Known_Languages": ["English", "French"],
+            "Aircraft_Restrictions": ["Boeing 777"],
             "Role": "regular",
             "Assigned_Seat": "1B"
         },
@@ -118,12 +118,12 @@ def main():
             "Age": 41,
             "Gender": "Male",
             "Nationality": "Spanish",
-            "Known Languages": ["Spanish", "English", "Portuguese"],
-            "Aircraft Restrictions": ["Airbus A330"],
+            "Known_Languages": ["Spanish", "English", "Portuguese"],
+            "Aircraft_Restrictions": ["Airbus A330"],
             "Role": "chef",
             "Assigned_Seat": "2A",
             "Dishes": ["Paella", "Tortilla Española"],
-            "Featured Dish": "Paella"
+            "Featured_Dish": "Paella"
         },
         {
             "CrewID": 4,
@@ -131,12 +131,12 @@ def main():
             "Age": 25,
             "Gender": "Female",
             "Nationality": "Pakistani",
-            "Known Languages": ["Urdu", "English"],
-            "Aircraft Restrictions": ["Boeing 737"],
+            "Known_Languages": ["Urdu", "English"],
+            "Aircraft_Restrictions": ["Boeing 737"],
             "Role": "chef",
             "Assigned_Seat": "2B",
             "Dishes": ["Biryani", "Chicken Karahi"],
-            "Featured Dish": "Biryani"
+            "Featured_Dish": "Biryani"
         },
         {
             "CrewID": 5,
@@ -144,8 +144,8 @@ def main():
             "Age": 38,
             "Gender": "Male",
             "Nationality": "Italian",
-            "Known Languages": ["Italian", "English"],
-            "Aircraft Restrictions": ["Airbus A380"],
+            "Known_Languages": ["Italian", "English"],
+            "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chief",
             "Assigned_Seat": "3A"
         },
@@ -155,8 +155,8 @@ def main():
             "Age": 31,
             "Gender": "Female",
             "Nationality": "French",
-            "Known Languages": ["French", "English"],
-            "Aircraft Restrictions": ["Boeing 787"],
+            "Known_Languages": ["French", "English"],
+            "Aircraft_Restrictions": ["Boeing 787"],
             "Role": "regular",
             "Assigned_Seat": "3B"
         },
@@ -166,8 +166,8 @@ def main():
             "Age": 45,
             "Gender": "Male",
             "Nationality": "Chinese",
-            "Known Languages": ["Mandarin", "English"],
-            "Aircraft Restrictions": ["Airbus A350"],
+            "Known_Languages": ["Mandarin", "English"],
+            "Aircraft_Restrictions": ["Airbus A350"],
             "Role": "regular",
             "Assigned_Seat": "4A"
         },
@@ -177,12 +177,12 @@ def main():
             "Age": 27,
             "Gender": "Female",
             "Nationality": "Moroccan",
-            "Known Languages": ["Arabic", "French", "English"],
-            "Aircraft Restrictions": ["Boeing 747"],
+            "Known_Languages": ["Arabic", "French", "English"],
+            "Aircraft_Restrictions": ["Boeing 747"],
             "Role": "chef",
             "Assigned_Seat": "4B",
             "Dishes": ["Couscous", "Tagine"],
-            "Featured Dish": "Couscous"
+            "Featured_Dish": "Couscous"
         },
         {
             "CrewID": 9,
@@ -190,8 +190,8 @@ def main():
             "Age": 30,
             "Gender": "Male",
             "Nationality": "Australian",
-            "Known Languages": ["English"],
-            "Aircraft Restrictions": ["Boeing 737", "Airbus A320"],
+            "Known_Languages": ["English"],
+            "Aircraft_Restrictions": ["Boeing 737", "Airbus A320"],
             "Role": "chief",
             "Assigned_Seat": "5A"
         },
@@ -201,12 +201,12 @@ def main():
             "Age": 22,
             "Gender": "Female",
             "Nationality": "Mexican",
-            "Known Languages": ["Spanish", "English"],
-            "Aircraft Restrictions": ["Airbus A380"],
+            "Known_Languages": ["Spanish", "English"],
+            "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chef",
             "Assigned_Seat": "5B",
             "Dishes": ["Tacos", "Enchiladas", "Guacamole"],
-            "Featured Dish": "Tacos"
+            "Featured_Dish": "Tacos"
         }
     ]
 
@@ -220,8 +220,8 @@ def main():
         "Age": "Enter Age: ",
         "Gender": "Enter Gender: ",
         "Nationality": "Enter Nationality: ",
-        "Known Languages": "Enter Known Languages: ",
-        "Aircraft Restrictions": "Enter Aircraft Restrictions (comma-separated):",
+        "Known_Languages": "Enter Known Languages: ",
+        "Aircraft_Restrictions": "Enter Aircraft Restrictions (comma-separated):",
         "Role": "Enter Cabin Crew Role (chief, regular, chef): ",
         "Assigned_Seat": "Enter Assigned Seat (if applicable): "
     }
