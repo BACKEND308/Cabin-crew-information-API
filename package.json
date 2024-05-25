@@ -4,7 +4,7 @@
     "main": "server.js",
     "scripts": {
         "start": "nodemon server",
-        "test mongoConnection": "node ./tests/testMongoConnection",
+        "test": "node ./tests/testMongoConnection",
         "test mysqlConnection": "node ./tests/testMysqlConnection"
     },
     "keywords": [],
