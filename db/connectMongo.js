@@ -5,18 +5,13 @@ dotenv.config();
 
 const connectMongo = async () => {
   try {
-    await mongoose.connect(process.env.MONGO, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(process.env.MONGO);
     await mongoose.connection.db.admin().command({ ping: 1 });
     console.log('Pinged your deployment. You successfully connected to MongoDB!');
   } catch (err) {
     console.error('MongoDB connection error:', err);
     process.exit(1);
-  } finally {
-    await mongoose.disconnect();
-  }
+  } 
 };
 
 module.exports = connectMongo;
