@@ -9,17 +9,19 @@ def insert_cabin_crew(db, cabin_crew_data):
     cabin_crew_collection = db.cabin_crew
     if cabin_crew_data["Role"].lower() == "chef":
         chef_data = prepare_chef_data(cabin_crew_data)
-        return insert_chef(db, chef_data)
+        chef_id = insert_chef(db, chef_data)
+        cabin_crew_data["ChefID"] = chef_id
+
+    result = cabin_crew_collection.update_one(
+        {"CrewID": cabin_crew_data["CrewID"]},  # Query matches documents with the same CrewID
+        {"$set": cabin_crew_data},  # Update the document with the data provided
+        upsert=True  # Insert a new document if no matching document is found
+    )
+    if result.upserted_id is not None:
+        return result.upserted_id
     else:
-        result = cabin_crew_collection.update_one(
-            {"CrewID": cabin_crew_data["CrewID"]},  # Query matches documents with the same CrewID
-            {"$set": cabin_crew_data},  # Update the document with the data provided
-            upsert=True  # Insert a new document if no matching document is found
-        )
-        if result.upserted_id is not None:
-            return result.upserted_id
-        else:
-            return result.matched_count  # Return the number of documents matched, which should be 1 if updated
+        return result.matched_count  # Return the number of documents matched, which should be 1 if updated
+
 
 # Performing a validation check for crew members:
 def validate_crew_composition(db, flight_number):
@@ -207,12 +209,126 @@ def main():
             "Assigned_Seat": "5B",
             "Dishes": ["Tacos", "Enchiladas", "Guacamole"],
             "Featured_Dish": "Tacos"
+        },
+        {
+            "CrewID": 11,
+            "MemberName": "Emma Watson",
+            "Age": 28,
+            "Gender": "Female",
+            "Nationality": "Canadian",
+            "Known_Languages": ["English", "French"],
+            "Aircraft_Restrictions": ["Boeing 737"],
+            "Role": "regular",
+            "Assigned_Seat": "6A"
+        },
+        {
+            "CrewID": 12,
+            "MemberName": "Michael Brown",
+            "Age": 33,
+            "Gender": "Male",
+            "Nationality": "American",
+            "Known_Languages": ["English", "Spanish"],
+            "Aircraft_Restrictions": ["Boeing 787"],
+            "Role": "regular",
+            "Assigned_Seat": "6B"
+        },
+        {
+            "CrewID": 13,
+            "MemberName": "Sophia Lee",
+            "Age": 29,
+            "Gender": "Female",
+            "Nationality": "Korean",
+            "Known_Languages": ["Korean", "English"],
+            "Aircraft_Restrictions": ["Airbus A350"],
+            "Role": "regular",
+            "Assigned_Seat": "7A"
+        },
+        {
+            "CrewID": 14,
+            "MemberName": "David Kim",
+            "Age": 42,
+            "Gender": "Male",
+            "Nationality": "Korean",
+            "Known_Languages": ["Korean", "English"],
+            "Aircraft_Restrictions": ["Boeing 777"],
+            "Role": "chief",
+            "Assigned_Seat": "7B"
+        },
+        {
+            "CrewID": 15,
+            "MemberName": "Isabella Rossi",
+            "Age": 31,
+            "Gender": "Female",
+            "Nationality": "Italian",
+            "Known_Languages": ["Italian", "English"],
+            "Aircraft_Restrictions": ["Airbus A320"],
+            "Role": "regular",
+            "Assigned_Seat": "8A"
+        },
+        {
+            "CrewID": 16,
+            "MemberName": "James Wilson",
+            "Age": 36,
+            "Gender": "Male",
+            "Nationality": "British",
+            "Known_Languages": ["English", "French"],
+            "Aircraft_Restrictions": ["Airbus A330"],
+            "Role": "chief",
+            "Assigned_Seat": "8B"
+        },
+        {
+            "CrewID": 17,
+            "MemberName": "Ava Martinez",
+            "Age": 26,
+            "Gender": "Female",
+            "Nationality": "Spanish",
+            "Known_Languages": ["Spanish", "English"],
+            "Aircraft_Restrictions": ["Boeing 737"],
+            "Role": "regular",
+            "Assigned_Seat": "9A"
+        },
+        {
+            "CrewID": 18,
+            "MemberName": "William Chen",
+            "Age": 39,
+            "Gender": "Male",
+            "Nationality": "Chinese",
+            "Known_Languages": ["Mandarin", "English"],
+            "Aircraft_Restrictions": ["Airbus A380"],
+            "Role": "chief",
+            "Assigned_Seat": "9B"
+        },
+        {
+            "CrewID": 19,
+            "MemberName": "Mia Clark",
+            "Age": 32,
+            "Gender": "Female",
+            "Nationality": "Australian",
+            "Known_Languages": ["English"],
+            "Aircraft_Restrictions": ["Boeing 747"],
+            "Role": "chef",
+            "Assigned_Seat": "10A",
+            "Dishes": ["Lamingtons", "Meat Pie", "Pavlova"],
+            "Featured_Dish": "Pavlova"
+        },
+        {
+            "CrewID": 20,
+            "MemberName": "Noah Gonzalez",
+            "Age": 27,
+            "Gender": "Male",
+            "Nationality": "Mexican",
+            "Known_Languages": ["Spanish", "English"],
+            "Aircraft_Restrictions": ["Airbus A350"],
+            "Role": "chef",
+            "Assigned_Seat": "10B",
+            "Dishes": ["Tacos", "Churros", "Quesadilla"],
+            "Featured_Dish": "Tacos"
         }
     ]
 
-    for data in sample_cabin_crew:
-        insert_cabin_crew(db, data)
-        print(f"Inserted {data['MemberName']} with Role: {data['Role']}")
+    # for data in sample_cabin_crew:
+    #     insert_cabin_crew(db, data)
+    #     print(f"Inserted {data['MemberName']} with Role: {data['Role']}")
 
     cabin_crew_prompts = {
         "CrewID": "Enter Crew ID: ",
@@ -243,3 +359,4 @@ def main():
 #
 if __name__ == '__main__':
     main()
+
