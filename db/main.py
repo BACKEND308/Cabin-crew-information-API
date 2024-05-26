@@ -101,7 +101,6 @@ def main():
             "Known_Languages": ["English", "Spanish"],
             "Aircraft_Restrictions": ["Boeing 747", "Airbus A320"],
             "Role": "chief",
-            "Assigned_Seat": "1A"
         },
         {
             "CrewID": 2,
@@ -112,7 +111,6 @@ def main():
             "Known_Languages": ["English", "French"],
             "Aircraft_Restrictions": ["Boeing 777"],
             "Role": "regular",
-            "Assigned_Seat": "1B"
         },
         {
             "CrewID": 3,
@@ -123,7 +121,6 @@ def main():
             "Known_Languages": ["Spanish", "English", "Portuguese"],
             "Aircraft_Restrictions": ["Airbus A330"],
             "Role": "chef",
-            "Assigned_Seat": "2A",
             "Dishes": ["Paella", "Tortilla Española"],
             "Featured_Dish": "Paella"
         },
@@ -136,7 +133,6 @@ def main():
             "Known_Languages": ["Urdu", "English"],
             "Aircraft_Restrictions": ["Boeing 737"],
             "Role": "chef",
-            "Assigned_Seat": "2B",
             "Dishes": ["Biryani", "Chicken Karahi"],
             "Featured_Dish": "Biryani"
         },
@@ -149,7 +145,6 @@ def main():
             "Known_Languages": ["Italian", "English"],
             "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chief",
-            "Assigned_Seat": "3A"
         },
         {
             "CrewID": 6,
@@ -160,7 +155,6 @@ def main():
             "Known_Languages": ["French", "English"],
             "Aircraft_Restrictions": ["Boeing 787"],
             "Role": "regular",
-            "Assigned_Seat": "3B"
         },
         {
             "CrewID": 7,
@@ -171,7 +165,6 @@ def main():
             "Known_Languages": ["Mandarin", "English"],
             "Aircraft_Restrictions": ["Airbus A350"],
             "Role": "regular",
-            "Assigned_Seat": "4A"
         },
         {
             "CrewID": 8,
@@ -182,7 +175,6 @@ def main():
             "Known_Languages": ["Arabic", "French", "English"],
             "Aircraft_Restrictions": ["Boeing 747"],
             "Role": "chef",
-            "Assigned_Seat": "4B",
             "Dishes": ["Couscous", "Tagine"],
             "Featured_Dish": "Couscous"
         },
@@ -195,7 +187,6 @@ def main():
             "Known_Languages": ["English"],
             "Aircraft_Restrictions": ["Boeing 737", "Airbus A320"],
             "Role": "chief",
-            "Assigned_Seat": "5A"
         },
         {
             "CrewID": 10,
@@ -206,7 +197,6 @@ def main():
             "Known_Languages": ["Spanish", "English"],
             "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chef",
-            "Assigned_Seat": "5B",
             "Dishes": ["Tacos", "Enchiladas", "Guacamole"],
             "Featured_Dish": "Tacos"
         },
@@ -219,7 +209,6 @@ def main():
             "Known_Languages": ["English", "French"],
             "Aircraft_Restrictions": ["Boeing 737"],
             "Role": "regular",
-            "Assigned_Seat": "6A"
         },
         {
             "CrewID": 12,
@@ -230,7 +219,6 @@ def main():
             "Known_Languages": ["English", "Spanish"],
             "Aircraft_Restrictions": ["Boeing 787"],
             "Role": "regular",
-            "Assigned_Seat": "6B"
         },
         {
             "CrewID": 13,
@@ -241,7 +229,6 @@ def main():
             "Known_Languages": ["Korean", "English"],
             "Aircraft_Restrictions": ["Airbus A350"],
             "Role": "regular",
-            "Assigned_Seat": "7A"
         },
         {
             "CrewID": 14,
@@ -252,7 +239,6 @@ def main():
             "Known_Languages": ["Korean", "English"],
             "Aircraft_Restrictions": ["Boeing 777"],
             "Role": "chief",
-            "Assigned_Seat": "7B"
         },
         {
             "CrewID": 15,
@@ -263,7 +249,6 @@ def main():
             "Known_Languages": ["Italian", "English"],
             "Aircraft_Restrictions": ["Airbus A320"],
             "Role": "regular",
-            "Assigned_Seat": "8A"
         },
         {
             "CrewID": 16,
@@ -274,7 +259,6 @@ def main():
             "Known_Languages": ["English", "French"],
             "Aircraft_Restrictions": ["Airbus A330"],
             "Role": "chief",
-            "Assigned_Seat": "8B"
         },
         {
             "CrewID": 17,
@@ -285,7 +269,6 @@ def main():
             "Known_Languages": ["Spanish", "English"],
             "Aircraft_Restrictions": ["Boeing 737"],
             "Role": "regular",
-            "Assigned_Seat": "9A"
         },
         {
             "CrewID": 18,
@@ -296,7 +279,6 @@ def main():
             "Known_Languages": ["Mandarin", "English"],
             "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chief",
-            "Assigned_Seat": "9B"
         },
         {
             "CrewID": 19,
@@ -307,7 +289,6 @@ def main():
             "Known_Languages": ["English"],
             "Aircraft_Restrictions": ["Boeing 747"],
             "Role": "chef",
-            "Assigned_Seat": "10A",
             "Dishes": ["Lamingtons", "Meat Pie", "Pavlova"],
             "Featured_Dish": "Pavlova"
         },
@@ -320,15 +301,14 @@ def main():
             "Known_Languages": ["Spanish", "English"],
             "Aircraft_Restrictions": ["Airbus A350"],
             "Role": "chef",
-            "Assigned_Seat": "10B",
             "Dishes": ["Tacos", "Churros", "Quesadilla"],
             "Featured_Dish": "Tacos"
         }
     ]
 
-    # for data in sample_cabin_crew:
-    #     insert_cabin_crew(db, data)
-    #     print(f"Inserted {data['MemberName']} with Role: {data['Role']}")
+    for data in sample_cabin_crew:
+        insert_cabin_crew(db, data)
+        print(f"Inserted {data['MemberName']} with Role: {data['Role']}")
 
     cabin_crew_prompts = {
         "CrewID": "Enter Crew ID: ",
@@ -339,7 +319,6 @@ def main():
         "Known_Languages": "Enter Known Languages: ",
         "Aircraft_Restrictions": "Enter Aircraft Restrictions (comma-separated):",
         "Role": "Enter Cabin Crew Role (chief, regular, chef): ",
-        "Assigned_Seat": "Enter Assigned Seat (if applicable): "
     }
 
     cabin_crew_data = input_document_data(cabin_crew_prompts) # This is for getting the data through the prompts
@@ -359,4 +338,5 @@ def main():
 #
 if __name__ == '__main__':
     main()
+
 
