@@ -9,17 +9,19 @@ def insert_cabin_crew(db, cabin_crew_data):
     cabin_crew_collection = db.cabin_crew
     if cabin_crew_data["Role"].lower() == "chef":
         chef_data = prepare_chef_data(cabin_crew_data)
-        return insert_chef(db, chef_data)
+        chef_id = insert_chef(db, chef_data)
+        cabin_crew_data["ChefID"] = chef_id
+
+    result = cabin_crew_collection.update_one(
+        {"CrewID": cabin_crew_data["CrewID"]},  # Query matches documents with the same CrewID
+        {"$set": cabin_crew_data},  # Update the document with the data provided
+        upsert=True  # Insert a new document if no matching document is found
+    )
+    if result.upserted_id is not None:
+        return result.upserted_id
     else:
-        result = cabin_crew_collection.update_one(
-            {"CrewID": cabin_crew_data["CrewID"]},  # Query matches documents with the same CrewID
-            {"$set": cabin_crew_data},  # Update the document with the data provided
-            upsert=True  # Insert a new document if no matching document is found
-        )
-        if result.upserted_id is not None:
-            return result.upserted_id
-        else:
-            return result.matched_count  # Return the number of documents matched, which should be 1 if updated
+        return result.matched_count  # Return the number of documents matched, which should be 1 if updated
+
 
 # Performing a validation check for crew members:
 def validate_crew_composition(db, flight_number):
@@ -99,7 +101,6 @@ def main():
             "Known_Languages": ["English", "Spanish"],
             "Aircraft_Restrictions": ["Boeing 747", "Airbus A320"],
             "Role": "chief",
-            "Assigned_Seat": "1A"
         },
         {
             "CrewID": 2,
@@ -110,7 +111,6 @@ def main():
             "Known_Languages": ["English", "French"],
             "Aircraft_Restrictions": ["Boeing 777"],
             "Role": "regular",
-            "Assigned_Seat": "1B"
         },
         {
             "CrewID": 3,
@@ -121,7 +121,6 @@ def main():
             "Known_Languages": ["Spanish", "English", "Portuguese"],
             "Aircraft_Restrictions": ["Airbus A330"],
             "Role": "chef",
-            "Assigned_Seat": "2A",
             "Dishes": ["Paella", "Tortilla Española"],
             "Featured_Dish": "Paella"
         },
@@ -134,7 +133,6 @@ def main():
             "Known_Languages": ["Urdu", "English"],
             "Aircraft_Restrictions": ["Boeing 737"],
             "Role": "chef",
-            "Assigned_Seat": "2B",
             "Dishes": ["Biryani", "Chicken Karahi"],
             "Featured_Dish": "Biryani"
         },
@@ -147,7 +145,6 @@ def main():
             "Known_Languages": ["Italian", "English"],
             "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chief",
-            "Assigned_Seat": "3A"
         },
         {
             "CrewID": 6,
@@ -158,7 +155,6 @@ def main():
             "Known_Languages": ["French", "English"],
             "Aircraft_Restrictions": ["Boeing 787"],
             "Role": "regular",
-            "Assigned_Seat": "3B"
         },
         {
             "CrewID": 7,
@@ -169,7 +165,6 @@ def main():
             "Known_Languages": ["Mandarin", "English"],
             "Aircraft_Restrictions": ["Airbus A350"],
             "Role": "regular",
-            "Assigned_Seat": "4A"
         },
         {
             "CrewID": 8,
@@ -180,7 +175,6 @@ def main():
             "Known_Languages": ["Arabic", "French", "English"],
             "Aircraft_Restrictions": ["Boeing 747"],
             "Role": "chef",
-            "Assigned_Seat": "4B",
             "Dishes": ["Couscous", "Tagine"],
             "Featured_Dish": "Couscous"
         },
@@ -193,7 +187,6 @@ def main():
             "Known_Languages": ["English"],
             "Aircraft_Restrictions": ["Boeing 737", "Airbus A320"],
             "Role": "chief",
-            "Assigned_Seat": "5A"
         },
         {
             "CrewID": 10,
@@ -204,8 +197,111 @@ def main():
             "Known_Languages": ["Spanish", "English"],
             "Aircraft_Restrictions": ["Airbus A380"],
             "Role": "chef",
-            "Assigned_Seat": "5B",
             "Dishes": ["Tacos", "Enchiladas", "Guacamole"],
+            "Featured_Dish": "Tacos"
+        },
+        {
+            "CrewID": 11,
+            "MemberName": "Emma Watson",
+            "Age": 28,
+            "Gender": "Female",
+            "Nationality": "Canadian",
+            "Known_Languages": ["English", "French"],
+            "Aircraft_Restrictions": ["Boeing 737"],
+            "Role": "regular",
+        },
+        {
+            "CrewID": 12,
+            "MemberName": "Michael Brown",
+            "Age": 33,
+            "Gender": "Male",
+            "Nationality": "American",
+            "Known_Languages": ["English", "Spanish"],
+            "Aircraft_Restrictions": ["Boeing 787"],
+            "Role": "regular",
+        },
+        {
+            "CrewID": 13,
+            "MemberName": "Sophia Lee",
+            "Age": 29,
+            "Gender": "Female",
+            "Nationality": "Korean",
+            "Known_Languages": ["Korean", "English"],
+            "Aircraft_Restrictions": ["Airbus A350"],
+            "Role": "regular",
+        },
+        {
+            "CrewID": 14,
+            "MemberName": "David Kim",
+            "Age": 42,
+            "Gender": "Male",
+            "Nationality": "Korean",
+            "Known_Languages": ["Korean", "English"],
+            "Aircraft_Restrictions": ["Boeing 777"],
+            "Role": "chief",
+        },
+        {
+            "CrewID": 15,
+            "MemberName": "Isabella Rossi",
+            "Age": 31,
+            "Gender": "Female",
+            "Nationality": "Italian",
+            "Known_Languages": ["Italian", "English"],
+            "Aircraft_Restrictions": ["Airbus A320"],
+            "Role": "regular",
+        },
+        {
+            "CrewID": 16,
+            "MemberName": "James Wilson",
+            "Age": 36,
+            "Gender": "Male",
+            "Nationality": "British",
+            "Known_Languages": ["English", "French"],
+            "Aircraft_Restrictions": ["Airbus A330"],
+            "Role": "chief",
+        },
+        {
+            "CrewID": 17,
+            "MemberName": "Ava Martinez",
+            "Age": 26,
+            "Gender": "Female",
+            "Nationality": "Spanish",
+            "Known_Languages": ["Spanish", "English"],
+            "Aircraft_Restrictions": ["Boeing 737"],
+            "Role": "regular",
+        },
+        {
+            "CrewID": 18,
+            "MemberName": "William Chen",
+            "Age": 39,
+            "Gender": "Male",
+            "Nationality": "Chinese",
+            "Known_Languages": ["Mandarin", "English"],
+            "Aircraft_Restrictions": ["Airbus A380"],
+            "Role": "chief",
+        },
+        {
+            "CrewID": 19,
+            "MemberName": "Mia Clark",
+            "Age": 32,
+            "Gender": "Female",
+            "Nationality": "Australian",
+            "Known_Languages": ["English"],
+            "Aircraft_Restrictions": ["Boeing 747"],
+            "Role": "chef",
+            "Dishes": ["Lamingtons", "Meat Pie", "Pavlova"],
+            "Featured_Dish": "Pavlova"
+        },
+        {
+            "CrewID": 20,
+            "MemberName": "Noah Gonzalez",
+            "Age": 27,
+            "Gender": "Male",
+            "Nationality": "Mexican",
+            "Known_Languages": ["Spanish", "English"],
+            "Aircraft_Restrictions": ["Airbus A350"],
+            "Role": "chef",
+            "Dishes": ["Tacos", "Churros", "Quesadilla"],
             "Featured_Dish": "Tacos"
         }
     ]
@@ -223,7 +319,6 @@ def main():
         "Known_Languages": "Enter Known Languages: ",
         "Aircraft_Restrictions": "Enter Aircraft Restrictions (comma-separated):",
         "Role": "Enter Cabin Crew Role (chief, regular, chef): ",
-        "Assigned_Seat": "Enter Assigned Seat (if applicable): "
     }
 
     cabin_crew_data = input_document_data(cabin_crew_prompts) # This is for getting the data through the prompts
@@ -243,3 +338,5 @@ def main():
 #
 if __name__ == '__main__':
     main()
+
+
