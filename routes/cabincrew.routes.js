@@ -17,13 +17,11 @@ router.get('/', async (req, res) => {
 
 // GET route to retrieve a cabin crew member by ID
 router.get('/:id', async (req, res) => {
-    console.log('Received ID:', req.params.id); // Log the received ID
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.id);
+        const cabinCrew = await CabinCrew.findOne({ CrewID: req.params.id });
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
         res.json(cabinCrew);
     }catch (err) {
-        console.error('Error retrieving cabin crew member:', err);
         res.status(500).json({ message: err.message });
     }
 });

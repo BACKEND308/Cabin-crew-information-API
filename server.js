@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 // app.use('/api/cabincrew', require('./routes/cabincrew.routes'));
 
 //Set the port and start the server
-const port=process.env.PORT || 3000;
+const port=process.env.PORT || 5003;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
